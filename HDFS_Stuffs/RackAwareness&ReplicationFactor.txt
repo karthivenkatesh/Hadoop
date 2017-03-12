@@ -3,7 +3,7 @@ To maintain Fault tolerance in hadoop cluster replication factor and rack awaren
 Replication Factor.
 ==================
  By deafult is 3 and mirros the data two times and maintain fault tolerance at disk level.
-
+	
 Rack Awareness
 ===============
 Rack is nothing but a cointainer which have multiple server.
