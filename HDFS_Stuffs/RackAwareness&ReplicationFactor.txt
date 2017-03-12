@@ -1,0 +1,47 @@
+To maintain Fault tolerance in hadoop cluster replication factor and rack awareness comes in picture.
+
+Replication Factor.
+==================
+ By deafult is 3 and mirros the data two times and maintain fault tolerance at disk level.
+
+Rack Awareness
+===============
+Rack is nothing but a cointainer which have multiple server.
+
+It's mainly to eradicate the fault tolerance on network level.
+
+In Data nodes, fault tolerance taken care by replication factor.
+
+Namenodes connected to Datanode through network switch. If switch goes down, it becomes problem for
+NN to communicate with DN. Rack awareness came into picture in this scenario.
+
+Out of 3 replicas, two resides in one rack and rest in third rack which is connected to NN by other
+network switch. If switch goes down, NN contact the rack to get the data.
+
+
+HeartBeat and Block report
+==========================
+Copies of blocks are stored in DN and NN having metadata of blocks.
+
+Default Block size = 128 mb in Hadoop 2.X and 64 mb in Hadoop 1.x
+
+Every 3 sec DN send its heartbeat to NN along with heartbeat it sends 
+1)Disk capacity
+2)current activity
+
+HeartBeat
+========== 
+	dfs.heartbeat.interval = 3 
+	
+Block report.
+=============
+DN periodically send block report to NN.
+ Default is 6 hours.
+ 
+ dfs.blockreport=6
+ 
+CheckSum
+=========
+It's used to ensure the blocks or files are not corrupted  while files are being read from HDFS or write to HDFS
+
+It's nothing but a hash value of the content in file to be copied.
