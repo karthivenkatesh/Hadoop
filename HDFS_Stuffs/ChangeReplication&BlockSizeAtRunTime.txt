@@ -8,4 +8,4 @@ Change Block Size At Run Time
 =============================
 2)hadoop fs -Ddfs.blocksize=64000000 -put /file /location -->To change the block size.
 
-Eg: hadoop fs -Ddfs.blocksize=64000000 -put /retail_db /user/venkat/
+Eg: hadoop fs -Ddfs.blocksize=64000000 -put /retail_db /user/venkat/retail
