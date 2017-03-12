@@ -1,0 +1,64 @@
+Meta data
+=========
+Files are divided into blocks based on dfs.blocksize (default 128 mb).
+
+Each block have block id, block pool id,file permission, block location called as metadata of file.
+
+Meta data stored in memory on NN.
+
+Namenode
+========
+NN is a memory component and is also a demon process.It's stores all metadata(in memory).
+
+Metadata is stored on disk on NN. Information about file location, ownership,permission, name of individual blocks, block location.
+
+NN have two important components which used to recover NN.
+1)FSimage
+2)Edit logs 
+
+
+Datanode
+========
+Actual content of files stored in DN.
+
+Name starts like blk_XXXXX
+
+Each slave node runs a DN deamon.
+
+Its also do checksum process.
+
+
+Secondary Namenode
+==================
+It only do the book keeping of NN.
+
+It used to merge the fsimage and edit logs and create new fsimage at regular intervals and sent back to NN.
+
+
+Name Node recovery
+===================
+Edit logs:
+==========
+Every one hour, changes in NN metadata called as transaction are logged in to edit logs.
+
+FSimage
+=======
+It only contains files and blocks name not contain block locations.
+
+Command
+========
+sudo -u hdfs hdfs dfsadmin -safmode enter
+sudo -u hdfs hdfs dfsadmin -saveNamespace   ---> to create new fsimage
+sudo -u hdfs hdfs dfsadmin -safmode leave
+
+The process done to create fsimage called checkpoint.
+
+Recovery process.
+=================
+1)Restart the NN.
+
+2)Restore latest FSimage
+
+3)Recovers using latest edit log.
+
+4) NN will do roll call to DN to determine block locations.

@@ -1,0 +1,11 @@
+Change Replication At Run Time
+==============================
+1)hadoop fs -Ddfs.replication=2 -put /file /location --> To change the replication of file during run time at the time of copying
+
+Eg: hadoop fs -Ddfs.replication=2 -put /retail_db /user/venkat/
+
+Change Block Size At Run Time
+=============================
+2)hadoop fs -Ddfs.blocksize=64000000 -put /file /location -->To change the block size.
+
+Eg: hadoop fs -Ddfs.blocksize=64000000 -put /retail_db /user/venkat/

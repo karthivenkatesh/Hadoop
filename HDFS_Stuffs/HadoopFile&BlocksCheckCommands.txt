@@ -1,0 +1,41 @@
+Hadoop File check commands
+==========================
+It displays the place of physical blocks copied in hosts. Associated blocks and block location of a file.
+
+1)hdfs fsck location(file path) -files -blocks -locations --> To list all, where our files located in cluster
+Eg:
+[root@sandbox ~]# hdfs fsck /user/venkat/retail_db/categories -files -blocks -locations
+Connecting to namenode via http://sandbox.hortonworks.com:50070/fsck?ugi=root&files=1&blocks=1&locations=1&path=%2Fuser%2Fvenkat%2Fretail_db%2Fcategories
+FSCK started by root (auth:SIMPLE) from /172.17.0.2 for path /user/venkat/retail_db/categories at Sun Mar 12 14:50:43 UTC 2017
+/user/venkat/retail_db/categories <dir>
+/user/venkat/retail_db/categories/part-00000 1087 bytes, 1 block(s):  OK
+0. BP-1464254149-172.17.0.2-1477381671113:blk_1073742893_2088 len=1087 repl=1 [DatanodeInfoWithStorage[172.17.0.2:50010,DS-10c300da-2e2c-4d0e-bb2f-a01867179944,DISK]]
+
+Status: HEALTHY
+ Total size:    1087 B
+ Total dirs:    1
+ Total files:   1
+ Total symlinks:                0
+ Total blocks (validated):      1 (avg. block size 1087 B)
+ Minimally replicated blocks:   1 (100.0 %)
+ Over-replicated blocks:        0 (0.0 %)
+ Under-replicated blocks:       0 (0.0 %)
+ Mis-replicated blocks:         0 (0.0 %)
+ Default replication factor:    1
+ Average block replication:     1.0
+ Corrupt blocks:                0
+ Missing replicas:              0 (0.0 %)
+ Number of data-nodes:          1
+ Number of racks:               1
+FSCK ended at Sun Mar 12 14:50:43 UTC 2017 in 5 milliseconds
+
+The filesystem under path '/user/venkat/retail_db/categories' is HEALTHY
+
+Block Id: blk_1073742893_2088 -- It is unique and is in ascending order.
+
+2)To check file size
+=====================
+	hadoop fs -du -s -h file path
+Eg:
+[root@sandbox ~]# hadoop fs -du -s -h /user/venkat/retail_db/categories/part*
+1.1 K  /user/venkat/retail_db/categories/part-00000

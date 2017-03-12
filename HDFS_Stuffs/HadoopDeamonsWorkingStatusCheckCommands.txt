@@ -1,0 +1,7 @@
+To Find my hadoop is running or not:
+
+ps -ef|grep -i manager   -->To check for yarn resources
+
+ps -ef|grep -i node   -->To check for Node
+
+ps -fu hdfs & ps -fu yarn

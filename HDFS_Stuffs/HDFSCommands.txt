@@ -1,0 +1,127 @@
+Hadoop Commands
+===============
+
+hadoop fs (used to manage user spaces, directories and files)
+
+hadoop jar (used to submit map reduce jobs)
+
+hdfs fsck (used for administration of cluster)
+
+1) hadoop version  --> It displays the commands
+
+2) hadoop fs (or) hdfs dfs(alias) --> It list all hadoop commands and to interact with hdfs files.
+
+
+AppendToFile
+============
+
+It appends the existing file
+
+hadoop fs -appendToFile <src> <dest>
+
+	Eg: hadoop fs -appendToFile /root/file1.txt /user/root/file.txt
+
+hadoop fs -appendToFile - <dest>  --> It takes the input from terminal as what we typing.
+
+	Eg: hadoop fs -appendToFile - /user/root/file.txt
+
+
+Help
+====
+
+hadoop fs -help commandname
+
+	Eg: hadoop fs -help appendToFile
+
+Ls
+==
+
+It list the files and folders in path.
+
+hadoop fs -ls /path
+
+	Eg:hadoop fs -ls /user
+
+CAT
+===
+
+To view what in file
+
+hadoop fs -cat /filepath
+
+	Eg:hadoop fs -cat /user/root/file.txt
+	
+	Eg:hadoop fs -ls /user/root
+
+CHECKSUM
+========
+
+Algorithm : MD5
+
+hadoop fs -checksum /filepath
+
+Eg:hadoop fs -checksum /user/root/file.txt
+
+CHANGEGROUP & CHOWN 
+===================
+
+Used to changed the owner and group of a file.
+
+hadoop fs -chown -R root(owner):supergroup(group) /filepath
+
+Eg: sudo -u hdfs hadoop fs -chown root:supergroup /user/root/file.txt
+
+	To change only group
+	====================
+
+hadoop fs -chgrp -R supergroup(group) /filepath
+
+Eg: sudo -u hdfs hadoop fs -chgrp -R supergroup /user/root/file.txt
+
+CHMOD
+=====
+To change the permissions
+
+owner-group-others  (r(read)W(write)x(execute))
+read-4
+write-2
+execute-1
+
+hadoop fs -chmod -R 777 /filepath
+
+Eg:
+
+hadoop fs -chmod 777 /user/root/file.txt
+
+MKDIR
+======
+To create directory in hdfs.
+
+hadoop fs -mkdir -p /filepath/directoryname  -> To create multiple directory
+
+Eg. hadoop fs -mkdir -p /user/root/dir1/dir2
+
+MOVEFROMLOCAL
+=============
+It's move file from local to hdfs. Source file will be deleted.
+
+hadoop fs -moveFromLocal /src /dst
+
+Eg. hadoop fs -moveFromLocal file.txt /user/root
+
+MOVETOLOCAL
+============
+It's move file from hdfs to local
+ 
+ hadoop fs -moveToLocal /src(hdfs) /dst(local)
+
+Eg. hadoop fs -moveFromLocal /user/root/file.txt /root
+
+MV
+==
+It move the file to directory only.
+
+hadoop fs -mv /src /dst
+
+Eg. hadoop fs -mv /root/file.txt /user/root/dir1/dir2
+

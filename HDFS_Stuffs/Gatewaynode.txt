@@ -1,0 +1,20 @@
+Gateway Node (Basteian server)
+============
+It is the connecting ponit to your hadoop cluster.
+
+These are some nodes in the hadoop cluster, will do not runs any deamon process but it stage the data coming from 
+source and also used to submit the job in the cluster
+
+Mainly used to reduce the congestion between job submission and job execution in node.
+
+It have the config files to understand what is NN, DN, RM, NM etc..
+
+File abstraction
+================
+A give files is more or equal to the size of your hard disk.
+
+How File abstraction achieved in HDFS?
+
+	Through Blocks.
+	
+Files in HDFS are logical. Blocks in HDFS are physical
