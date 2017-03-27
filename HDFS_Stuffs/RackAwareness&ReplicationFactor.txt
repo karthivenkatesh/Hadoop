@@ -6,18 +6,17 @@ Replication Factor.
 	
 Rack Awareness
 ===============
-Rack is nothing but a cointainer which have multiple server.
-
-It's mainly to eradicate the fault tolerance on network level.
-
-In Data nodes, fault tolerance taken care by replication factor.
-
-Namenodes connected to Datanode through network switch. If switch goes down, it becomes problem for
-NN to communicate with DN. Rack awareness came into picture in this scenario.
-
-Out of 3 replicas, two resides in one rack and rest in third rack which is connected to NN by other
-network switch. If switch goes down, NN contact the rack to get the data.
-
+Rack is nothing but a cointainer which have multiple server.In Data nodes, fault tolerance taken care by replication factor.
+1)In production cluster, all your DN's divided and grouped together called racks.
+2)It takes care of fault tolerance at network level.
+3)DN use network switches to communicate each other or with other DN on different racks.
+4)HDFS block placement will be happen using the "Data placement policy" or "Replica placement policy".
+5)NN connect to DN through network switch, if the switch goes down, it becomes problem for NN to get block for processing.
+6)By default two out of three replicas stored in one rack of different machines and third replica stored in some other rack of DN.
+7)If any of the switch goes down, NN will not have problem to communicate with he same data resides on DN in different rack through other network switch, get it for processing.
+8)Replica placement policy depends on three main factors as "Reliability, Availability and Network Bandwidth utilizatio".
+9)If more replica's the system is more reliable, available and less n/w utilization & write performance.
+10)If less replica's the system is less reliable, available and more n/w utilization & write performance.
 
 HeartBeat and Block report
 ==========================
