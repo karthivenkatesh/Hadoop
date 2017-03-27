@@ -1,0 +1,22 @@
+HDFS Writes operation
+=====================
+1)HDFS support read,write,create and delete.
+2)Interaction between client and HDFS is handled by "HDFS client library".
+3)This is library that exports HDFS files system interface.
+4)To write a log, client call first write method in library and as result RPC call happens to NN.
+5)NN makes sure that file is not already exist and client has write permission to write. Once the checks passes, file is created in HDFS namespace and as well in "edit logs".
+6)NN in turn check the files, how many blocks required based on block size and DN free space availability through heartbeat, revet back to client.
+7)Once client receives the block information from NN and client contact the allocated DN. 
+8)Then client directly writes it blocks of replica's into DN.
+9)Finally all replica's acknowledge from 3rd to 2nd replica, 2nd to 1st replica and1st to client saying writing happens successfully.
+10)Client writes data to DN in form of packets.
+11)After block wites, DN send it block id to NN through HB, NN update the Block id in Block locations.
+12)Finally client calls "close" method in "HDFS client library". this incates the NN that write operation is completed.
+
+HDFS File Reads Operation
+=========================
+1)Interaction between client and HDFS is handled by "HDFS client library".
+2)To read a log, client call "open method" in library and as result RPC call happens to NN and get the block information of file resides in DN.
+3)Once the info received, it contacts the DN and reads the files that divides into serious of blocks in sequential order(Blk1, Blk2..).
+4)These order is sorted by Network distance.
+5)HDFS also support "parallel read and write operation" from different client and called HDFS is scalable.
